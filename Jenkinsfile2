@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    stages{
+        stage('Checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/gkiran04/DevSecOps-project.git'
+            }
+        }
+        stage('Code Analysis'){
+            steps{
+                withSonarQubeEnv(credentialsId: 'sonar') {
+                    sh 'mvn clean verify sonar:sonar \
+                    -Dsonar.projectKey=devsecops-project-key
+                }
+            }
+        }
+    }
+}
