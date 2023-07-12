@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools { 
+    /*tools { 
         maven 'maven-3.8.6' 
-    }
+    }*/
     stages {
         stage('Checkout git') {
             steps {
@@ -22,11 +22,11 @@ pipeline {
         }
         stage('SonarQube Analysis'){
             steps{
-                withSonarQubeEnv('SonarQube-server') {
+                withSonarQubeEnv('sonar') {
                         sh 'mvn clean verify sonar:sonar \
                         -Dsonar.projectKey=devsecops-project-key \
-                        -Dsonar.host.url=$sonarurl \
-                        -Dsonar.login=$sonarlogin'
+                        -Dsonar.host.url=http://34.100.157.153:9000/ \
+                        -Dsonar.login=admin'
                 }
             }
         }
