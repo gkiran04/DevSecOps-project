@@ -27,7 +27,7 @@ pipeline {
                         -Dsonar.projectKey=devsecops-project-key \
                         -Dsonar.host.url=http://34.100.157.153:9000 \
                         -Dsonar.login=admin \
-                        -Dsonar.token=squ_9e86adbee33e1e4fdf333170161d330fc83a7629'
+                        -Dsonar.login=squ_9e86adbee33e1e4fdf333170161d330fc83a7629'
                 }
             }
         }
