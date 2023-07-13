@@ -11,7 +11,7 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/gkiran04/DevSecOps-project.git'
             }
         }
-        
+
         stage('Code Analysis'){
             steps{
                 withSonarQubeEnv('sonar') {
@@ -23,5 +23,13 @@ pipeline{
                 }
             }
         }
-    }
-}
+
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+        }
+    } // END Stages
+} // END Pipeline
