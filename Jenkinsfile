@@ -25,7 +25,7 @@ pipeline {
                 withSonarQubeEnv('sonar') {
                         sh 'mvn clean verify sonar:sonar \
                         -Dsonar.projectKey=devsecops-project-key \
-                        -Dsonar.host.url=http://34.100.157.153:9000 \
+                        -Dsonar.host.url=http://34.93.14.143:9000/ \
                         -Dsonar.login=admin \
                         -Dsonar.login=squ_9e86adbee33e1e4fdf333170161d330fc83a7629'
                 }
