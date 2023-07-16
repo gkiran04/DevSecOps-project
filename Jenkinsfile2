@@ -36,6 +36,25 @@ pipeline{
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
+
+        stage('Deploy to Artifactory') {
+            steps {
+                script {
+                    def server = Artifactory.server('defaultjfrog')
+                    def uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "./target/demo-0.0.1-SNAPSHOT.jar",
+                                "target": "DEMOARTIFACTORY/"
+                            }
+                            
+                        ]
+                    }"""
+
+                    server.upload(uploadSpec)
+                }
+            }
+        }
     } // END Stages
 } // END Pipeline
 
