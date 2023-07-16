@@ -30,6 +30,12 @@ pipeline{
               }
             }
         }
+
+        stage('Build'){
+            steps{
+                sh 'mvn clean package -Dmaven.test.skip=true'
+            }
+        }
     } // END Stages
 } // END Pipeline
 
