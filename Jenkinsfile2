@@ -76,6 +76,7 @@ pipeline{
                 script {
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
                         def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
+                        dockerImage.push()
                     }
                         
                 }
@@ -83,7 +84,7 @@ pipeline{
         }
         
 
-        stage('Image Push') {
+        /* stage('Image Push') {
             steps {
                 // Push Docker image to registry
                 script {
@@ -92,7 +93,7 @@ pipeline{
                     }
                 }
             }
-        }
+        } */
     } // END Stages
 } // END Pipeline
 
