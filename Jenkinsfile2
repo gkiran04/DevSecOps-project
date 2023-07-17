@@ -5,7 +5,7 @@ pipeline{
     }
 
     environment {
-        dockerImage = 'webapp:$BUILD_ID'
+        dockerImage = 'webapp'
         dockerRegistry = 'https://hub.docker.com'
         dockerCredentialsId = 'dockerlogin'
     }
