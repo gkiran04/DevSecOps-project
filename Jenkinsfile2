@@ -4,6 +4,12 @@ pipeline{
         maven 'maven-3.8.6' 
     }
 
+    environment {
+        dockerImage = 'webapp:$BUILD_ID'
+        dockerRegistry = 'https://hub.docker.com'
+        dockerCredentialsId = 'dockerlogin'
+    }
+
     stages{
 
         stage('Checkout'){
@@ -12,7 +18,7 @@ pipeline{
             }
         }
 
-        stage('Code Analysis'){
+        /* stage('Code Analysis'){
             steps{
                 withSonarQubeEnv('sonar') {
                         sh 'mvn clean verify sonar:sonar \
@@ -29,7 +35,7 @@ pipeline{
                 waitForQualityGate abortPipeline: true
               }
             }
-        }
+        } */
 
         stage('Build'){
             steps{
@@ -37,7 +43,7 @@ pipeline{
             }
         }
 
-        stage('Deploy to Artifactory') {
+        /* stage('Deploy to Artifactory') {
             steps {
                 script {
                     def server = Artifactory.server('defaultjfrog')
@@ -59,6 +65,30 @@ pipeline{
         stage('Image Build'){
             steps{
                 sh 'sudo docker build . -t myapp'
+            }
+        } */
+
+        stage('Image Build') {
+            steps {
+                // Checkout source code from your repository if needed
+
+                // Build Docker image
+                script {
+                    docker.withRegistry(dockerRegistry, dockerCredentialsId) {
+                        def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
+                    }
+                }
+            }
+        }
+
+        stage('Image Push') {
+            steps {
+                // Push Docker image to registry
+                script {
+                    docker.withRegistry(dockerRegistry, dockerCredentialsId) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     } // END Stages
