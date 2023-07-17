@@ -77,9 +77,11 @@ pipeline{
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
                         def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
                     }
+                        
                 }
             }
         }
+        
 
         stage('Image Push') {
             steps {
