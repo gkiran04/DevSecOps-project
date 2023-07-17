@@ -5,7 +5,7 @@ pipeline{
     }
 
     environment {
-        dockerImage = 'gkiran04/webapp:latest'
+        dockerImage = 'gkiran04/webapp:v0.0.1'
         dockerRegistry = 'https://registry.hub.docker.com'
         dockerCredentialsId = 'Docker_Hub'
     }
@@ -76,7 +76,7 @@ pipeline{
                 script {
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
                         def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
-                        dockerImage.push()
+                        
                     }
                         
                 }
@@ -84,7 +84,7 @@ pipeline{
         }
         
 
-        /* stage('Image Push') {
+        stage('Image Push') {
             steps {
                 // Push Docker image to registry
                 script {
@@ -93,7 +93,7 @@ pipeline{
                     }
                 }
             }
-        } */
+        } 
     } // END Stages
 } // END Pipeline
 
