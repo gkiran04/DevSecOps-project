@@ -6,7 +6,7 @@ pipeline{
 
     environment {
         dockerImage = 'webapp'
-        dockerRegistry = 'https://hub.docker.com'
+        dockerRegistry = 'https://registry.hub.docker.com'
         dockerCredentialsId = 'Docker_Hub'
     }
 
