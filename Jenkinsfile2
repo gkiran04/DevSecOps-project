@@ -7,7 +7,7 @@ pipeline{
     environment {
         dockerImage = 'webapp'
         dockerRegistry = 'https://hub.docker.com'
-        dockerCredentialsId = 'dockerlogin'
+        dockerCredentialsId = 'DOCKER_HUB'
     }
 
     stages{
