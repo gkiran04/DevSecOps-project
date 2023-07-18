@@ -5,7 +5,7 @@ pipeline{
     }
 
     environment {
-        dockerImage = 'gkiran04/webapp:${env.BUID_ID}'
+        dockerImage = 'gkiran04/webapp'
         dockerRegistry = 'https://registry.hub.docker.com'
         dockerCredentialsId = 'Docker_Hub'
     }
@@ -75,7 +75,7 @@ pipeline{
                 // Build Docker image
                 script {
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
-                        def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
+                        def dockerImage = docker.build(env.dockerImage:${env.BUID_ID}, '-f Dockerfile .')
                         dockerImage.push()
                     }    
                 }
