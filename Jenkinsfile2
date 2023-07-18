@@ -74,10 +74,7 @@ pipeline{
 
                 // Build Docker image
                 script {
-                    docker.withRegistry(dockerRegistry, dockerCredentialsId) {
-                        def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
-                        
-                    }
+                    def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
                         
                 }
             }
@@ -93,7 +90,7 @@ pipeline{
                     }
                 }
             }
-        } 
+        }
     } // END Stages
 } // END Pipeline
 
@@ -101,4 +98,9 @@ pipeline{
 /* 
 -Dsonar.host.url=http://34.93.14.143:9000 
 -Dsonar.login=admin \
-                        -Dsonar.login=squ_9e86adbee33e1e4fdf333170161d330fc83a7629 */
+                        -Dsonar.login=squ_9e86adbee33e1e4fdf333170161d330fc83a7629
+                        
+docker.withRegistry(dockerRegistry, dockerCredentialsId) {
+                        def dockerImage = docker.build(env.dockerImage, '-f Dockerfile .')
+                        dockerImage.push()
+                    }                         */
