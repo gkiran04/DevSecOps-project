@@ -68,14 +68,14 @@ pipeline{
             }
         } */
 
-        stage('Image Build') {
+        stage('Image Build & Push') {
             steps {
                 // Checkout source code from your repository if needed
 
                 // Build Docker image
                 script {
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
-                        def dockerImage = docker.build("${env.dockerImage}":"${env.BUILD_ID}",'-f Dockerfile .')
+                        def dockerImage = docker.build(env.dockerImage,'-f Dockerfile .')
                         dockerImage.push()
                     }    
                 }
