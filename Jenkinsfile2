@@ -75,7 +75,7 @@ pipeline{
                 // Build Docker image
                 script {
                     docker.withRegistry(dockerRegistry, dockerCredentialsId) {
-                        def dockerImage = docker.build(env.dockerImage:${env.BUID_ID}, '-f Dockerfile .')
+                        def dockerImage = docker.build(env.dockerImage:${BUID_ID}, '-f Dockerfile .')
                         dockerImage.push()
                     }    
                 }
