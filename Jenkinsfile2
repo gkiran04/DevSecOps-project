@@ -5,7 +5,7 @@ pipeline{
     }
 
     environment {
-        dockerImage = 'gkiran04/mywebapp'
+        dockerImage = 'gkiran04/mywebapp:"${BUILD_NUMBER}"'
         dockerRegistry = 'https://registry.hub.docker.com'
         dockerCredentialsId = 'Docker_Hub'
     }
