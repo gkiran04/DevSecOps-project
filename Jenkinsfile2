@@ -1,11 +1,11 @@
 pipeline{
-    agent any
+    agent {labele 'k8s-slave'}
     tools { 
         maven 'maven-3.8.6' 
     }
 
     environment {
-        dockerImage = 'gkiran04/mywebapp:"${BUILD_NUMBER}"'
+        dockerImage = 'gkiran04/mywebapp:latest'
         dockerRegistry = 'https://registry.hub.docker.com'
         dockerCredentialsId = 'Docker_Hub'
     }
@@ -93,6 +93,14 @@ pipeline{
                 }
             }
         } */
+
+        stage('K8S'){
+            steps{
+                dir('kubernetes') {
+                    sh 'kubectl apply -f Deployment.yml'
+                }
+            }
+        }
     } // END Stages
 } // END Pipeline
 
