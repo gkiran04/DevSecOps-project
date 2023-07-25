@@ -13,8 +13,8 @@ pipeline{
     stages{
 
         stage('Checkout'){
+            agent any
             steps{
-                agent any
                 git branch: 'main', url: 'https://github.com/gkiran04/DevSecOps-project.git'
             }
         }
