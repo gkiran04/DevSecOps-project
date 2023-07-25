@@ -1,5 +1,5 @@
 pipeline{
-    agent {labele 'k8s-slave'}
+    agent {label 'k8s-slave'}
     tools { 
         maven 'maven-3.8.6' 
     }
