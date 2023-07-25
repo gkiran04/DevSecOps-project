@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'k8s-slave'}
+    agent none
     tools { 
         maven 'maven-3.8.6' 
     }
@@ -14,6 +14,7 @@ pipeline{
 
         stage('Checkout'){
             steps{
+                agent any
                 git branch: 'main', url: 'https://github.com/gkiran04/DevSecOps-project.git'
             }
         }
@@ -38,6 +39,7 @@ pipeline{
         } */
 
         stage('Build'){
+            agent any
             steps{
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
@@ -69,6 +71,7 @@ pipeline{
         } */
 
         stage('Image Build & Push') {
+            agent any
             steps {
                 // Checkout source code from your repository if needed
 
@@ -95,6 +98,7 @@ pipeline{
         } */
 
         stage('K8S'){
+            agent {label 'k8s-slave'}
             steps{
                 dir('kubernetes') {
                     sh 'kubectl apply -f Deployment.yml'
